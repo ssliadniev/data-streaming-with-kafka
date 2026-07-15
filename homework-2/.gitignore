@@ -16,6 +16,3 @@ __pycache__/
 # Local environment variables / secrets
 .env
 .env.local
-
-# Dataset & logs
-/homework-2/data/twitter_dataset.csv
