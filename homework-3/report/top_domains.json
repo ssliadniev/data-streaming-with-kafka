@@ -1,0 +1,24 @@
+{
+    "top_domains": [
+        {
+            "domain": "com",
+            "visits": 4272
+        },
+        {
+            "domain": "net",
+            "visits": 229
+        },
+        {
+            "domain": "ua",
+            "visits": 133
+        },
+        {
+            "domain": "ai",
+            "visits": 129
+        },
+        {
+            "domain": "org",
+            "visits": 29
+        }
+    ]
+}
