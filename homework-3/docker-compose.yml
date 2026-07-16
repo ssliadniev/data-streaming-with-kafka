@@ -1,0 +1,54 @@
+services:
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+    container_name: redpanda
+    networks:
+      - kafka-net
+    command:
+      - redpanda start
+      - --smp 1
+      - --overprovisioned
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+    ports:
+      - "19092:19092"
+      - "9092:9092"
+
+  producer:
+    build: .
+    container_name: history-producer
+    restart: on-failure
+    networks:
+      - kafka-net
+    command: python -m src.producer.main
+    environment:
+      - PYTHONUNBUFFERED=1
+      - KAFKA_BROKER=redpanda:9092
+      - KAFKA_TOPIC=browser-history
+      - CSV_FILE_PATH=/app/data/history.csv
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - redpanda
+
+  consumer:
+    build: .
+    container_name: history-consumer
+    restart: on-failure
+    networks:
+      - kafka-net
+    command: python -m src.consumer.main
+    environment:
+      - PYTHONUNBUFFERED=1
+      - KAFKA_BROKER=redpanda:9092
+      - KAFKA_TOPIC=browser-history
+      - CONSUMER_GROUP=stats-group
+    volumes:
+      - ./report:/app/report
+    depends_on:
+      - redpanda
+
+
+networks:
+  kafka-net:
+    driver: bridge
