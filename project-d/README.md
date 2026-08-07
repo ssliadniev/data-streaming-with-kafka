@@ -34,7 +34,7 @@ The pipeline consists of a containerized Apache Kafka (KRaft mode) cluster and t
 ## How to run the implementation
 
 **Step 1: Prepare the dataset**  
-Ensure the dataset is located at exactly `data/household_power_consumption.txt`.
+Ensure the dataset is located at exactly `dataset/household_power_consumption.txt`.
 
 **Step 2: Environment configuration**  
 Create your local environment file by copying the provided example template:
