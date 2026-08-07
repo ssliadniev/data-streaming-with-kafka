@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Data
+data/
+*.zip
+*.txt
+
+# IDEs
+.vscode/
+.idea/
+
+# Environment variables
+.env
